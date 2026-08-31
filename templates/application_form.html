@@ -1,0 +1,52 @@
+<section class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <form action="/jobs/{{ job.job_id }}/apply" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="card-body p-4 p-md-5">
+            <div class="d-flex align-items-start gap-3 pb-4 mb-4 border-bottom">
+                <div>
+                    <h4 class="fw-bold mb-1">Apply for this role</h4>
+                    <p class="text-muted mb-0">Review your details before submitting your application.</p>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="full_name" class="form-label fw-semibold">Full name</label>
+                    <input id="full_name" type="text" name="full_name" class="form-control" value="{{ user['name'] if user else '' }}" placeholder="Enter your name" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="email" class="form-label fw-semibold">Email address</label>
+                    <input id="email" type="email" name="email" class="form-control" value="{{ user['email'] if user else '' }}" placeholder="you@example.com" required>
+                </div>
+
+                <div class="col-12">
+                    <label for="linkedin_url" class="form-label fw-semibold">LinkedIn profile</label>
+                    <input id="linkedin_url" type="url" name="linkedin_url" class="form-control" value="{{ user['linkedin_url'] or '' if user else '' }}" placeholder="https://www.linkedin.com/in/your-name">
+                </div>
+
+                <div class="col-12">
+                    <label for="education" class="form-label fw-semibold">Education</label>
+                    <textarea id="education" name="education" class="form-control" rows="3" placeholder="Degree, institution, or relevant course" required>{{ user['education'] or '' if user else '' }}</textarea>
+                </div>
+
+                <div class="col-12">
+                    <label for="work_experience" class="form-label fw-semibold">Work experience</label>
+                    <textarea id="work_experience" name="work_experience" class="form-control" rows="4" placeholder="Work experience, internships, or relevant projects">{{ user['work_experience'] or '' if user else '' }}</textarea>
+                </div>
+
+                <div class="col-12">
+                    <label for="resume_url" class="form-label fw-semibold">Portfolio or résumé URL</label>
+                    <input id="resume_url" type="url" name="resume_url" class="form-control" value="{{ user['resume_url'] or '' if user else '' }}" placeholder="https://example.com/portfolio-or-resume">
+                    <div class="form-text">Use a public link that employers can open.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-white border-top p-4 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
+            <p class="text-muted small mb-0">Your profile details are pre-filled for convenience.</p>
+            <button type="submit" class="btn btn-dark px-4">Submit application</button>
+        </div>
+    </form>
+</section>
